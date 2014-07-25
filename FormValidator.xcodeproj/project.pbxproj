@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A23DFF83198303F200B764A1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23DFF82198303F200B764A1 /* SignUpViewController.swift */; };
 		A2616DAA197E43AD008F72F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2616DA9197E43AD008F72F7 /* AppDelegate.swift */; };
-		A2616DAC197E43AD008F72F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2616DAB197E43AD008F72F7 /* ViewController.swift */; };
+		A2616DAC197E43AD008F72F7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2616DAB197E43AD008F72F7 /* LogInViewController.swift */; };
 		A2616DAF197E43AD008F72F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2616DAD197E43AD008F72F7 /* Main.storyboard */; };
 		A2616DB1197E43AD008F72F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2616DB0197E43AD008F72F7 /* Images.xcassets */; };
 		A2616DBD197E43AD008F72F7 /* FormValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2616DBC197E43AD008F72F7 /* FormValidatorTests.swift */; };
+		A2616DC8197E43D2008F72F7 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2616DC7197E43D2008F72F7 /* Validator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,15 +27,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A23DFF82198303F200B764A1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A2616DA4197E43AD008F72F7 /* FormValidator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormValidator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2616DA8197E43AD008F72F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2616DA9197E43AD008F72F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A2616DAB197E43AD008F72F7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A2616DAB197E43AD008F72F7 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		A2616DAE197E43AD008F72F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A2616DB0197E43AD008F72F7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A2616DB6197E43AD008F72F7 /* FormValidatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormValidatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2616DBB197E43AD008F72F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2616DBC197E43AD008F72F7 /* FormValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidatorTests.swift; sourceTree = "<group>"; };
+		A2616DC7197E43D2008F72F7 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +80,9 @@
 			isa = PBXGroup;
 			children = (
 				A2616DA9197E43AD008F72F7 /* AppDelegate.swift */,
-				A2616DAB197E43AD008F72F7 /* ViewController.swift */,
+				A2616DAB197E43AD008F72F7 /* LogInViewController.swift */,
+				A23DFF82198303F200B764A1 /* SignUpViewController.swift */,
+				A2616DC6197E43B6008F72F7 /* Validator */,
 				A2616DAD197E43AD008F72F7 /* Main.storyboard */,
 				A2616DB0197E43AD008F72F7 /* Images.xcassets */,
 				A2616DA7197E43AD008F72F7 /* Supporting Files */,
@@ -107,6 +113,14 @@
 				A2616DBB197E43AD008F72F7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A2616DC6197E43B6008F72F7 /* Validator */ = {
+			isa = PBXGroup;
+			children = (
+				A2616DC7197E43D2008F72F7 /* Validator.swift */,
+			);
+			name = Validator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,7 +222,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2616DAC197E43AD008F72F7 /* ViewController.swift in Sources */,
+				A2616DAC197E43AD008F72F7 /* LogInViewController.swift in Sources */,
+				A2616DC8197E43D2008F72F7 /* Validator.swift in Sources */,
+				A23DFF83198303F200B764A1 /* SignUpViewController.swift in Sources */,
 				A2616DAA197E43AD008F72F7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,6 +413,7 @@
 				A2616DC2197E43AD008F72F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A2616DC3197E43AD008F72F7 /* Build configuration list for PBXNativeTarget "FormValidatorTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +422,7 @@
 				A2616DC5197E43AD008F72F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
