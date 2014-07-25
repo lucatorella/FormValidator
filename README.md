@@ -10,7 +10,8 @@ A simple protocol
 ```
 protocol Validator {
 		func validate() -> Result
-}```
+}
+```
 
 and a couple of class to check a single field or a n entire form: `PasswordValidator`, `EmailValidator`, `SignInValidator`, `SignUpValidator`
 
