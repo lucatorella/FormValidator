@@ -1,18 +1,8 @@
-//
-//  Validator.swift
-//  FormValidator
-//
-//  Created by Luca Torella on 22/07/2014.
-//  Copyright (c) 2014 Luca Torella. All rights reserved.
-//
+// Playground - noun: a place where people can play
+
+import UIKit
 
 import Foundation
-
-enum Result {
-    // when there will be something like NS_OPTIONS we won't need a list here
-    case Error([ValidationError])
-    case Success
-}
 
 enum ValidationError {
     case ValidationErrorEmail, ValidationErrorPassword, ValidationErrorPasswordConfirmation
@@ -30,7 +20,7 @@ enum ValidationError {
 }
 
 protocol Validator {
-    func validate() -> Result
+    func validate() -> (Bool, [ValidationError])
 }
 
 class PasswordValidator : Validator {
@@ -45,12 +35,12 @@ class PasswordValidator : Validator {
         self.password = password
     }
 
-    func validate() -> Result {
+    func validate() -> (Bool, [ValidationError]) {
 
         if countElements(password) < 4 || countElements(password) > 30 {
-            return .Error([.ValidationErrorPassword])
+            return (false, [.ValidationErrorPassword])
         } else {
-            return .Success
+            return (true, [])
         }
     }
 }
@@ -67,15 +57,15 @@ class EmailValidator : Validator {
         self.email = email
     }
 
-    func validate() -> Result {
+    func validate() -> (Bool, [ValidationError]) {
 
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
 
         if emailTest.evaluateWithObject(email) {
-            return .Success
+            return (true, [])
         } else {
-            return .Error([.ValidationErrorEmail])
+            return (false, [.ValidationErrorEmail])
         }
     }
 }
@@ -89,32 +79,11 @@ class SignInValidator : Validator {
         emailValidator.email = email
         passwordValidator.password = password
     }
-    
-    func validate() -> Result {
-        var ls: [ValidationError] = []
-        var res: Result
-        var b = false
-        res = emailValidator.validate()
-        switch res {
-        case let .Error(err):
-            ls = err
-        default:
-            b = true
-        }
 
-        res = passwordValidator.validate()
-        switch res {
-        case let .Error(err):
-            ls += err
-        default:
-            b &= true
-        }
-
-        if b {
-            return .Success
-        } else {
-            return .Error(ls)
-        }
+    func validate() -> (Bool, [ValidationError]) {
+        var (b1, err1) = emailValidator.validate()
+        var (b2, err2) = passwordValidator.validate()
+        return (b1 && b2, err1 + err2)
     }
 }
 
@@ -130,36 +99,28 @@ class SignUpValidator : Validator {
         passwordConfirmationValidator.password = passwordConfirmation
     }
 
-    func validate() -> Result {
-        var ls: [ValidationError] = []
-        var res: Result
-        var b = false
-        res = emailValidator.validate()
-        switch res {
-        case let .Error(err):
-            ls = err
-        default:
-            b = true
-        }
-
-        res = passwordValidator.validate()
-        switch res {
-        case let .Error(err):
-            ls += err
-        default:
-            b &= true
-        }
+    func validate() -> (Bool, [ValidationError]) {
+        var (b1, err1) = emailValidator.validate()
+        var (b2, err2) = passwordValidator.validate()
+        var b = b1 & b2
+        var errs = err1 + err2
 
         if passwordValidator.password != passwordConfirmationValidator.password {
-            ls += .ValidationErrorPasswordConfirmation
+            errs += .ValidationErrorPasswordConfirmation
+            b = false
         }
-
-        if b {
-            return .Success
-        } else {
-            return .Error(ls)
-        }
+        
+        return (b, errs)
     }
 }
+
+let goodEmail = "someone@somewhere.com"
+let badEmail = "someone_somewhere.com"
+var (b, e) = EmailValidator(email: goodEmail).validate()
+(b, e) = EmailValidator(email: badEmail).validate()
+
+(b, e) = SignUpValidator(email: goodEmail, password: "password", passwordConfirmation: "password").validate()
+
+(b, e) = SignInValidator(email: goodEmail, password: "password").validate()
 
 
