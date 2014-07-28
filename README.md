@@ -9,11 +9,11 @@ A simple protocol...
 
 ```
 protocol Validator {
-	func validate() -> Result
+	func validate() -> (Bool, [ValidationError])
 }
 ```
 
-...and a couple of classes to check a single field or an entire form. There is `PasswordValidator`, `EmailValidator`, `SignInValidator`, `SignUpValidator`. It's easy to add validators or to edit them.
+...and a couple of classes to check a single field or an entire form. It's easy to add validators or to edit them.
 
 A simple example:
 
