@@ -110,7 +110,7 @@ class SignUpValidator : Validator {
         var errs = err1 + err2
 
         if passwordValidator.password != passwordConfirmationValidator.password {
-            errs += .ValidationErrorPasswordConfirmation
+            errs.append(.ValidationErrorPasswordConfirmation)
             b = false
         }
         
