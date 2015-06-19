@@ -19,18 +19,17 @@ class SignUpViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-
     @IBAction func submit(sender: AnyObject) {
         emailField.resignFirstResponder()
         passwordField.resignFirstResponder()
         passwordConfirmationField.resignFirstResponder()
 
-        let sv = SignUpValidator(email: emailField.text, password: passwordField.text, passwordConfirmation: passwordConfirmationField.text)
+        let sv = SignUpValidator(email: emailField.text ?? "", password: passwordField.text ?? "", passwordConfirmation: passwordConfirmationField.text ?? "")
         var title = ""
         switch sv.validate() {
-        case .Success:
+        case .Success():
             title = "All fields looks good!"
-        case let .Error(errors):
+        case .Failure(let errors):
             title = "There are issues with the following field(s): "
             let c = errors.count
             var i = 0

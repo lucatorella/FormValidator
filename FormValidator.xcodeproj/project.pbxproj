@@ -14,6 +14,7 @@
 		A2616DB1197E43AD008F72F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2616DB0197E43AD008F72F7 /* Images.xcassets */; };
 		A2616DBD197E43AD008F72F7 /* FormValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2616DBC197E43AD008F72F7 /* FormValidatorTests.swift */; };
 		A2616DC8197E43D2008F72F7 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2616DC7197E43D2008F72F7 /* Validator.swift */; };
+		A2D4902B1B34B4D6000D5142 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D4902A1B34B4D6000D5142 /* Result.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +39,7 @@
 		A2616DBB197E43AD008F72F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2616DBC197E43AD008F72F7 /* FormValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidatorTests.swift; sourceTree = "<group>"; };
 		A2616DC7197E43D2008F72F7 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
-		A2AA5A2D1986A56100030E28 /* FormValidator.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = FormValidator.playground; sourceTree = "<group>"; };
+		A2D4902A1B34B4D6000D5142 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +81,6 @@
 		A2616DA6197E43AD008F72F7 /* FormValidator */ = {
 			isa = PBXGroup;
 			children = (
-				A2AA5A2D1986A56100030E28 /* FormValidator.playground */,
 				A2616DA9197E43AD008F72F7 /* AppDelegate.swift */,
 				A2616DAB197E43AD008F72F7 /* LogInViewController.swift */,
 				A23DFF82198303F200B764A1 /* SignUpViewController.swift */,
@@ -121,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				A2616DC7197E43D2008F72F7 /* Validator.swift */,
+				A2D4902A1B34B4D6000D5142 /* Result.swift */,
 			);
 			name = Validator;
 			sourceTree = "<group>";
@@ -225,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2616DAC197E43AD008F72F7 /* LogInViewController.swift in Sources */,
+				A2D4902B1B34B4D6000D5142 /* Result.swift in Sources */,
 				A2616DC8197E43D2008F72F7 /* Validator.swift in Sources */,
 				A23DFF83198303F200B764A1 /* SignUpViewController.swift in Sources */,
 				A2616DAA197E43AD008F72F7 /* AppDelegate.swift in Sources */,

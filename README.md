@@ -9,7 +9,7 @@ FormValidator is built around this simple protocol:
 
 ```
 protocol Validator {
-   func validate() -> (Bool, [ValidationError])
+    func validate() -> Result<Void, [ValidationError]>
 }
 ```
 Every validator class should implement it, from the simple `PasswordValidator`, to a more complex `SignInValidator` or your custom form validator.

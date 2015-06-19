@@ -23,13 +23,13 @@ class LogInViewController: UIViewController {
         emailField.resignFirstResponder()
         passwordField.resignFirstResponder()
 
-        let sv = SignInValidator(email: emailField.text, password: passwordField.text)
+        let sv = SignInValidator(email: emailField.text!, password: passwordField.text!)
 
         var title = ""
         switch sv.validate() {
-        case .Success:
+        case .Success():
             title = "All fields looks good!"
-        case let .Error(errors):
+        case .Failure(let errors):
             title = "There are issues with the following field(s): "
             let c = errors.count
             var i = 0

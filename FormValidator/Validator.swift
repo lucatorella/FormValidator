@@ -24,7 +24,7 @@ enum ValidationError {
 }
 
 protocol Validator {
-    func validate() -> (Bool, [ValidationError])
+    func validate() -> Result<Void, [ValidationError]>
 }
 
 class PasswordValidator : Validator {
@@ -39,12 +39,11 @@ class PasswordValidator : Validator {
         self.password = password
     }
 
-    func validate() -> (Bool, [ValidationError]) {
-
-        if countElements(password) < 4 || countElements(password) > 30 {
-            return (false, [.ValidationErrorPassword])
+    func validate() -> Result<Void, [ValidationError]> {
+        if password.characters.count < 4 || password.characters.count > 30 {
+            return Result.Failure([.ValidationErrorPassword])
         } else {
-            return (true, [])
+            return Result.Success()
         }
     }
 }
@@ -61,15 +60,15 @@ class EmailValidator : Validator {
         self.email = email
     }
 
-    func validate() -> (Bool, [ValidationError]) {
+    func validate() -> Result<Void, [ValidationError]> {
 
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
 
         if emailTest.evaluateWithObject(email) {
-            return (true, [])
+            return Result.Success()
         } else {
-            return (false, [.ValidationErrorEmail])
+            return Result.Failure([.ValidationErrorEmail])
         }
     }
 }
@@ -84,10 +83,20 @@ class SignInValidator : Validator {
         passwordValidator.password = password
     }
 
-    func validate() -> (Bool, [ValidationError]) {
-        var (b1, err1) = emailValidator.validate()
-        var (b2, err2) = passwordValidator.validate()
-        return (b1 && b2, err1 + err2)
+    func validate() -> Result<Void, [ValidationError]> {
+        let result1 = emailValidator.validate()
+        let result2 = passwordValidator.validate()
+        switch (result1, result2) {
+        case (.Success(), .Success()):
+            return .Success()
+        case (.Success(), .Failure(let error)):
+            return .Failure(error)
+        case (.Failure(let error), .Success()):
+            return .Failure(error)
+        case (.Failure(let error1), .Failure(let error2)):
+            let error = error1 + error2
+            return .Failure(error)
+        }
     }
 }
 
@@ -95,25 +104,35 @@ class SignUpValidator : Validator {
 
     let emailValidator = EmailValidator()
     let passwordValidator = PasswordValidator()
-    let passwordConfirmationValidator = PasswordValidator()
+    let passwordConfirmation: String
 
-    init(email: String, password: String, passwordConfirmation: String) {
+    init(email: String, password: String, passwordConfirmation password2: String) {
         emailValidator.email = email
         passwordValidator.password = password
-        passwordConfirmationValidator.password = passwordConfirmation
+        passwordConfirmation = password2
     }
 
-    func validate() -> (Bool, [ValidationError]) {
-        var (b1, err1) = emailValidator.validate()
-        var (b2, err2) = passwordValidator.validate()
-        var b = b1 & b2
-        var errs = err1 + err2
-
-        if passwordValidator.password != passwordConfirmationValidator.password {
-            errs.append(.ValidationErrorPasswordConfirmation)
-            b = false
+    func validate() -> Result<Void, [ValidationError]> {
+        let result1 = emailValidator.validate()
+        let result2 = passwordValidator.validate()
+        let result3: Result<Void, [ValidationError]>
+        if passwordValidator.password != passwordConfirmation {
+            result3 = Result.Failure([.ValidationErrorPasswordConfirmation])
+        } else {
+            result3 = Result.Success()
         }
-        
-        return (b, errs)
+         return [result2, result3].reduce(result1) { (r1, r2) -> Result<Void, [ValidationError]> in
+            switch (result1, result2) {
+            case (.Success(), .Success()):
+                return .Success()
+            case (.Success(), .Failure(let error)):
+                return .Failure(error)
+            case (.Failure(let error), .Success()):
+                return .Failure(error)
+            case (.Failure(let error1), .Failure(let error2)):
+                let error = error1 + error2
+                return .Failure(error)
+            }
+        }
     }
 }
